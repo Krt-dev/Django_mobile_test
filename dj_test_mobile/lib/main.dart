@@ -59,14 +59,14 @@ class _MyAppState extends State<MyApp> {
                   ? SvgPicture.asset(
                       'assets/images/bookmark_selected_icon.svg')
                   : SvgPicture.asset(
-                      'assets/images/bookmark_selected_icon.svg'),
+                      'assets/images/bookmark_unselected_icon.svg'),
               label: '',
             ),
             BottomNavigationBarItem(
               icon: _selectedIndex == 3
                   ? SvgPicture.asset('assets/images/bookmark_selected_icon.svg')
                   : SvgPicture.asset(
-                      'assets/images/bookmark_selected_icon.svg'),
+                      'assets/images/bookmark_unselected_icon.svg'),
               label: '',
             ),
           ],
