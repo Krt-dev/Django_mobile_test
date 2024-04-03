@@ -18,11 +18,7 @@ class FriendsPage extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Name submitted successfully!')),
         );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to submit name. Please try again.')),
-        );
-      }
+      }                                                                       
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Network error. Please check your internet connection.')),
@@ -54,6 +50,7 @@ class FriendsPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                  submitName(context, nameController.text);
+                 nameController.clear();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, 

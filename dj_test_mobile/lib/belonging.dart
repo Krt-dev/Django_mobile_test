@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class BelongingPage extends StatelessWidget {
   const BelongingPage({Key? key}) : super(key: key);
 
+  static const String apiUrl = 'http://192.168.1.10:8000/api/v1/belongings/';
+
+   Future<void> submitName(BuildContext context, String name) async {
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: {'name': name},
+      );
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Name submitted successfully!')),
+        );
+      }                                                                       
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Network error. Please check your internet connection.')),
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController nameController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Belonging'),
@@ -15,16 +39,18 @@ class BelongingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Enter Borrowers Name',
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                labelText: 'Enter Your Name',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // API call dre? idk
+                submitName(context, nameController.text);
+                nameController.clear();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue, 
